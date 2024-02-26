@@ -86,6 +86,10 @@ public class SudokuSolver {
         return true;
     }
 
+    /**
+     * determines whether a row is unassigned
+     * @returns the row or -1 if not found
+     */
     private int findUnassignedRow() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -97,6 +101,10 @@ public class SudokuSolver {
         return -1;
     }
 
+    /**
+     * determines whether a colum is unassigned
+     * @returns col or -1 if not found
+     */
     private int findUnassignedCol() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
@@ -108,27 +116,38 @@ public class SudokuSolver {
         return -1;
     }
 
+    /**
+     * Getter, gets puzzle
+     * @return puzzle
+     */
     public int[][] getPuzzle() {
         return puzzle;
     }
 
-    public static void printBoard(int[][] board) {
+    /**
+     * "prints" the board by returning a string w the board
+     * @param board, the soduku board
+     * @return a string version of the board
+     */
+    public static String printBoard(int[][] board) {
+        StringBuilder boardString = new StringBuilder();
         for (int row = 0; row < 9; row++) {
             if (row % 3 == 0 && row != 0) {
-                System.out.println("-------------------|----------");
+                boardString.append("-------------------|----------\n");
             }
             for (int col = 0; col < 9; col++) {
                 if (col % 3 == 0 && col != 0) {
-                    System.out.print("| ");
+                    boardString.append("| ");
                 }
                 if (col == 8) {
-                    System.out.println(board[row][col]);
+                    boardString.append(board[row][col]).append("\n");
                 } else {
-                    System.out.print(board[row][col] + " ");
+                    boardString.append(board[row][col]).append(" ");
                 }
             }
         }
-        System.out.println();
+        return boardString.toString();
     }
+
 }
 

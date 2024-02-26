@@ -1,5 +1,8 @@
 import java.util.Scanner;
 
+/**
+ * Main class; handles all input and output from the terminal
+ */
 public class Main {
         private static final int EASY = 1;
         private static final int MEDIUM = 2;
@@ -9,33 +12,43 @@ public class Main {
             Scanner scanner = new Scanner(System.in);
             SudokuSolver solver = new SudokuSolver();
 
-            System.out.println("Welcome to Interactive Sudoku!\n Enter difficulty level:\n1 - easy\n2 - medium\n3 - difficult\n");
+            System.out.println("Welcome to Sudoku!\n Enter difficulty level:\n1 \n2 \n3");
             int choice = scanner.nextInt();
-
-            if (choice < 1 || choice > 3) {
-                System.out.println("Please enter a valid number");
-            }
 
             int[][] puzzle = getPuzzle(choice);
             solver.setPuzzle(puzzle);
 
-            System.out.println("\nCurrent Board:");
-            SudokuSolver.printBoard(puzzle);
+            System.out.println("Current Board:");
+            System.out.println(SudokuSolver.printBoard(puzzle));
 
-            System.out.println("\nChoose an option:\n1 - Automatically solve the puzzle\n2 - Manually enter a value\n3 - Exit");
+            System.out.println("Choose an option:\n1 - Automatically solve the puzzle\n2 - Manually enter a value\n3 - Exit");
             choice = scanner.nextInt();
 
             if (choice == 1) {
                 if (solver.solve()) {
-                    System.out.println("\nSolved Puzzle:");
-                    SudokuSolver.printBoard(solver.getPuzzle());
+                    System.out.println(SudokuSolver.printBoard(solver.getPuzzle()));
                 } else {
-                    System.out.println("No solution exists for this puzzle.");
+                    System.out.println("There is no solutionn");
                 }
             } else if (choice == 2) {
-                // Implementation for manual entry
-                // You can prompt the user for row, column, and value here
-                // Implement the logic to update the puzzle and check for validity
+                System.out.println("Enter row : ");
+                int row = scanner.nextInt() - 1;
+
+                System.out.println("Enter column : ");
+                int col = scanner.nextInt() - 1;
+
+                System.out.println("Enter value : ");
+                int value = scanner.nextInt();
+
+                if (value < 1 || value > 9) {
+                    System.out.println("Incorrect value");
+                } else {
+                    if (puzzle[row][col] == 0) {
+                        puzzle[row][col] = value;
+                        System.out.println("This is the updated board:");
+                        System.out.println(SudokuSolver.printBoard(puzzle));
+                    }
+                }
             } else if (choice == 3) {
                 System.out.println("Exited");
             } else {
