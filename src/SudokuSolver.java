@@ -29,8 +29,8 @@ public class SudokuSolver {
         }
 
         for (int num = 1; num <= 9; num++) {
-            row = findUnassignedRow();
-            col = findUnassignedCol();
+            row = findRow();
+            col = findColumn();
 
             if (isValidPlacement(num, row, col)) {
                 puzzle[row][col] = num;
@@ -48,7 +48,7 @@ public class SudokuSolver {
      * Finds unassigned box in grid.
      * @return true if location is found
      */
-    private boolean findUnassignedLocation() {
+    public boolean findUnassignedLocation() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (puzzle[row][col] == 0) {
@@ -66,7 +66,7 @@ public class SudokuSolver {
      * @param col, the column to place the number.
      * @return true if # is valid
      */
-    private boolean isValidPlacement(int number, int row, int col) {
+    public boolean isValidPlacement(int number, int row, int col) {
         for (int i = 0; i < 9; i++) {
             if (puzzle[row][i] == number || puzzle[i][col] == number) {
                 return false;
@@ -90,7 +90,7 @@ public class SudokuSolver {
      * determines whether a row is unassigned
      * @returns the row or -1 if not found
      */
-    private int findUnassignedRow() {
+    public int findRow() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (puzzle[row][col] == 0) {
@@ -105,7 +105,7 @@ public class SudokuSolver {
      * determines whether a colum is unassigned
      * @returns col or -1 if not found
      */
-    private int findUnassignedCol() {
+    public int findColumn() {
         for (int row = 0; row < 9; row++) {
             for (int col = 0; col < 9; col++) {
                 if (puzzle[row][col] == 0) {
